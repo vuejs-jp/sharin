@@ -1,7 +1,7 @@
 {
   "name": "sharin",
   "main": "index.js",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "Takuma HANATANI<mail@potato4d.me>",
   "license": "MIT",
   "scripts": {
