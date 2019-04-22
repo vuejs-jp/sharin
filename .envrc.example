@@ -1,5 +1,10 @@
+# 検知したい対象のレポジトリを指定
 export SHARIN_UPSTREAM_REPO=nuxt/docs
 export SHARIN_UPSTREAM_BRANCH=master
 export SHARIN_UPSTREAM_CHANGED_FILEPATH_STARTS_WITH=en/
+
+# Issue を作成したいレポジトリを指定
 export SHARIN_ORIGIN_REPO=vuejs-jp/ja.docs.nuxtjs
+
+# GitHub Token を指定
 export SHARIN_TOKEN_GITHUB=
