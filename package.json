@@ -1,0 +1,16 @@
+{
+  "name": "sharin",
+  "main": "index.js",
+  "author": "Takuma HANATANI<mail@potato4d.me>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^10.12.21",
+    "typescript": "^3.3.1"
+  },
+  "dependencies": {
+    "@octokit/rest": "^16.14.0",
+    "consola": "^2.3.2",
+    "prettier": "^1.17.0",
+    "ts-node": "^8.0.2"
+  }
+}
