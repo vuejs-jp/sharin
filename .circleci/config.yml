@@ -17,3 +17,38 @@ jobs:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn lint:prettier
       - run: yarn build
+  cron:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:10.15.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "yarn.lock" }}
+          - v1-dependencies-
+      - run: yarn
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
+      - run: yarn lint:prettier
+      - run: yarn start &
+      - run: sleep 60
+      - run: killall node
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - build
+  monitor:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - cron
