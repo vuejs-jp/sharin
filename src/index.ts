@@ -39,7 +39,10 @@ async function receiveNewCommit(commit: Commit) {
 
 function main() {
   return new Promise((_, rej) => {
-    const watcher = new GitHubBranchWatcher({ octokit, interval: 1 * 60 * 1000 })
+    const watcher = new GitHubBranchWatcher({
+      octokit,
+      interval: 1 * 60 * 1000
+    })
     watcher.on('error', e => {
       rej(e)
     })
