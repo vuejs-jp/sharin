@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "build": "tsc",
-    "format": "prettier './src/**/*.ts' --write"
+    "format": "prettier './src/**/*.ts' --write",
+    "lint:prettier": "prettier --check './src/**/*.ts'"
   },
   "devDependencies": {
     "@types/node": "^10.12.21",
