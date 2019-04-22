@@ -3,6 +3,11 @@
   "main": "index.js",
   "author": "Takuma HANATANI<mail@potato4d.me>",
   "license": "MIT",
+  "scripts": {
+    "start": "ts-node ./src/index.ts",
+    "build": "tsc",
+    "format": "prettier './src/**/*.ts' --write"
+  },
   "devDependencies": {
     "@types/node": "^10.12.21",
     "typescript": "^3.3.1"
