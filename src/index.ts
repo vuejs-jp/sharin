@@ -18,8 +18,9 @@ async function receiveNewCommit(commit: Commit) {
       commit.commit
     })`
   })
+
   if (issues.total_count > 0) {
-    consola.log(`Already issued for ${title}`)
+    consola.info(`Already issued for ${title}`)
     return
   }
 
@@ -31,10 +32,14 @@ async function receiveNewCommit(commit: Commit) {
       commit.link
     }`
   }
-  const {
-    data: { number }
-  } = await octokit.issues.create(create)
-  consola.log(`Created issue #${number} for ${title}`)
+  try {
+    const {
+      data: { number }
+    } = await octokit.issues.create(create)
+    consola.success(`Created issue #${number} for ${title}`)
+  } catch (e) {
+    consola.error(`Create issue failed(${title})`)
+  }
 }
 
 function main() {
@@ -67,7 +72,14 @@ function main() {
   })
 }
 
-main().catch((...e: any[]) => {
-  console.error(...e)
-  process.exit(1)
-})
+async function run() {
+  try {
+    await main()
+    process.exit(0)
+  } catch (e) {
+    console.error(...e)
+    process.exit(1)
+  }
+}
+
+run()

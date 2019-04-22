@@ -12,7 +12,8 @@
     "lint:prettier": "prettier --check './src/**/*.ts'"
   },
   "devDependencies": {
-    "@types/node": "^10.12.21",
+    "@types/consola": "^1.0.0",
+    "@types/node": "^11.13.6",
     "standard-version": "^5.0.2",
     "typescript": "^3.3.1"
   },
