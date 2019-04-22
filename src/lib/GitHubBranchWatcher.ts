@@ -21,6 +21,7 @@ export default class extends EventEmitter {
   on(event: 'error', handler: (e: Error) => void): this
   on(event: 'warning', handler: (e: Error) => void): this
   on(event: 'new-commit', handler: (c: Commit) => void): this
+  on(event: 'end', handler: () => void): this
 
   on(event: string | symbol, listener: (...args: any[]) => void) {
     return super.on(event, listener)
@@ -29,6 +30,7 @@ export default class extends EventEmitter {
   emit(event: 'error', e: Error): boolean
   emit(event: 'warning', e: Error): boolean
   emit(event: 'new-commit', c: Commit): boolean
+  emit(event: 'end'): boolean
 
   emit(event: string | symbol, ...args: any[]) {
     return super.emit(event, ...args)
@@ -156,5 +158,7 @@ export default class extends EventEmitter {
         }
       })
     )
+
+    this.emit('end')
   }
 }

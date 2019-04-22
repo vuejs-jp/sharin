@@ -55,6 +55,11 @@ function main() {
       consola.warn(`W: ${e.message}`)
     })
     watcher.on('new-commit', receiveNewCommit)
+    watcher.on('end', () => {
+      setTimeout(() => {
+        process.exit(0)
+      }, 5 * 1000)
+    })
 
     const target: {
       target: string
