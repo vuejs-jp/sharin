@@ -33,9 +33,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn lint:prettier
-      - run: yarn start &
-      - run: sleep 60
-      - run: killall node
+      - run: yarn start
 
 workflows:
   version: 2
