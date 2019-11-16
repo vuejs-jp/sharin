@@ -28,6 +28,7 @@ async function receiveNewCommit(commit: Commit) {
     owner: Config.origin.owner,
     repo: Config.origin.repo,
     title: `[doc] ${title.replace(/( )?\(#.*\)/, '')}`,
+    labels: ['help wanted'],
     body: `本家のドキュメントに更新がありました :page_facing_up:\r\nOriginal:${
       commit.link
     }`
