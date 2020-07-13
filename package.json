@@ -14,7 +14,7 @@
   "devDependencies": {
     "@types/consola": "^1.0.0",
     "@types/node": "^11.13.6",
-    "standard-version": "^5.0.2",
+    "standard-version": "^8.0.1",
     "typescript": "^3.3.1"
   },
   "dependencies": {
