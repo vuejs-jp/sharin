@@ -8,6 +8,30 @@ const octokit = new Octokit({
   auth: `token ${Config.token.github}`
 })
 
+const Category = {
+  Api: 'api',
+  Blog: 'blog',
+  Faq: 'faq',
+  Guide: 'guide',
+  Guides: 'guides'
+} as const
+
+type Category = typeof Category[keyof typeof Category]
+
+function getLabels(filenames: Array<string>): Array<string> {
+  const prefix = Config.upstream.startsWith
+  const labels = new Set<string>(['help wanted'])
+
+  for (var filename of filenames) {
+    for (const category of Object.values(Category)) {
+      if (filename.startsWith(prefix + category + '/')) {
+        labels.add(category)
+      }
+    }
+  }
+  return Array.from(labels)
+}
+
 async function receiveNewCommit(commit: Commit) {
   const [title] = commit.message.split('\n')
 
@@ -28,7 +52,7 @@ async function receiveNewCommit(commit: Commit) {
     owner: Config.origin.owner,
     repo: Config.origin.repo,
     title: `[doc] ${title.replace(/( )?\(#.*\)/, '')}`,
-    labels: ['help wanted'],
+    labels: getLabels(commit.filenames),
     body: `本家のドキュメントに更新がありました :page_facing_up:\r\nOriginal: ${
       commit.link
     }\r\nFiles:\r\n ${commit.filenames.join('\r\n')}`
