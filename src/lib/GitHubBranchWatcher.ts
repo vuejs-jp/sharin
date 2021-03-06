@@ -7,6 +7,7 @@ export type Commit = {
   link: string
   message: string
   commit: string
+  updatedFiles: Array<string>
 }
 
 type Target = {
@@ -84,6 +85,7 @@ export default class extends EventEmitter {
   private async runner() {
     const main = async (target: Target) => {
       const seenCommit = this.seenCommits.get(target.seenCommitKey) || {}
+      let updatedFiles: string[]
 
       const { repo, owner, filterPath } = target
 
@@ -114,10 +116,14 @@ export default class extends EventEmitter {
             owner,
             sha
           })
-          const f = files.filter(({ filename }) => {
-            return filterPath(filename)
-          })
-          if (f.length === 0) {
+          updatedFiles = files
+            .filter(({ filename }) => {
+              return filterPath(filename)
+            })
+            .map(({ filename }) => {
+              return filename
+            })
+          if (updatedFiles.length === 0) {
             // ignored
             seenCommit[sha] = true
             return
@@ -130,7 +136,8 @@ export default class extends EventEmitter {
             owner,
             commit: d.sha,
             link: html_url,
-            message
+            message,
+            updatedFiles
           })
         ) {
           seenCommit[sha] = true
