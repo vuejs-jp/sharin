@@ -68,7 +68,7 @@ function main() {
       filterPath?: (p: string) => boolean
     } = {
       target: 'nuxt/nuxtjs.org',
-      branch: 'master'
+      branch: 'main'
     }
     const startsWith = Config.upstream.startsWith
     if (startsWith) {
