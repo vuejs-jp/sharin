@@ -33,7 +33,8 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn lint:prettier
-      - run: yarn start
+      - run: echo "Pending until Nuxt v3 documents upgrade is settled"
+      # - run: yarn start
 
 workflows:
   version: 2
